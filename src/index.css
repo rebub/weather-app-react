@@ -1,13 +1,364 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/** FONT IMPORT **/
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+
+/** VARIABLES **/
+:root {
+  --dark: #0c0c0c62;
+  --light: #efefef8a;
+  --base-light: #fff;
+  --base-dark: #050505;
+  --accent-color: #5796ff;
+
+  /** day colors **/
+  --day01: #29386f;
+  --day02: #b8f5ff;
+
+  /** night colors **/
+  --night01:#0F2129;
+  --night02:#47334A;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.day {
+  --accent: var(--dark);
+  --overlay: var(--light);
+  --text: var(--base-light);
+  --background: var(--base-light);
+  --hover-font: var(--base-light);
+  --hover-background: var(--base-dark);
+
+
+  --main-gradient: linear-gradient(var(--day01), var(--day02));
+}
+
+.night {
+  --overlay: var(--dark);
+  --text: var(--base-light);
+  --accent: var(--base-light);
+  --background: var(--base-dark);
+  --hover-font: var(--base-dark);
+  --hover-background: var(--base-light);
+
+  --main-gradient: linear-gradient(var(--night01), var(--night02));
+}
+
+/** GENERAL SETTINGS **/
+* {
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+  overflow: hidden;
+  box-sizing: border-box;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+main {
+  padding: 2em;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.app {
+  background-size: cover;
+  transition: all .3 ease;
+  background-position: bottom;
+  background: var(--main-gradient);
+}
+
+.search-box {
+  width: 100%;
+  margin: 0 0 75px;
+}
+
+.search-box .search-bar {
+  width: 100%;
+  padding: 1em;
+  display: block;
+  border-radius: 5px;
+  color: var(--text);
+  transition: all .3s ease;
+
+  border: none;
+  outline: none;
+  appearance: none;
+  background: var(--overlay);
+}
+
+.main-items {
+  height: 65vh;
+    display: grid;
+    align-content: center;
+    transition: all .3s ease;
+}
+
+.location-box .location {
+  color: var(--text);
+  text-align: center;
+}
+
+.location-box .date {
+  color: var(--text);
+  text-align: center;
+}
+
+.weather-box {
+  color: var(--text);
+  text-align: center;
+}
+
+.weather-box .temp {
+  text-align: center;
+  margin: .25em auto;
+  position: relative;
+  display: inline-block;
+  font-size: clamp(1rem, 10vw, 10rem); 
+}
+
+
+.sun, .moon {
+  top: 35%;
+  left: 75%;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  position: absolute;
+  transition: all 1s ease;
+}
+
+.sun {
+  top: 400px;
+  opacity: 0;
+  background-color: #ffdd38;
+  box-shadow: 0px 0px 20px rgba(255, 221, 56, 0.5);
+}
+
+.moon {
+  animation: moonAppear .3s both;
+}
+
+@keyframes moonAppear {
+  0% {
+    box-shadow: inset 0px 0px rgba(255, 255, 255, 0.9);
+  }
+  100% {
+    box-shadow: inset 10px -10px rgba(255, 255, 255, 0.9);
+  }
+}
+
+@keyframes falling {
+  0%, 100% {
+    opacity: 0;
+  }
+  70% {
+    opacity: 1;
+  }
+  0% {
+    transform: translate(300px, 0px);
+  }
+  100% {
+    transform: translate(0px, 300px);
+  }
+}
+
+.allstars {
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  position: absolute;
+  left: 0;
+  top: 10%;
+  overflow: hidden;
+}
+
+.allstars [class^=star] {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background-color: #fff;
+  animation: falling 6s infinite;
+}
+
+.allstars .star1 {
+  position: absolute;
+  left: 95%;
+  top: -23%;
+  animation-delay: -0.1s;
+}
+.allstars .star2 {
+  position: absolute;
+  left: 18%;
+  top: 35%;
+          animation-delay: -0.2s;
+}
+.allstars .star3 {
+  position: absolute;
+  left: 24%;
+  top: 21%;
+  animation-delay: -0.3s;
+}
+.allstars .star4 {
+  position: absolute;
+  left: 28%;
+  top: -23%;
+  animation-delay: -0.4s;
+}
+.allstars .star5 {
+  position: absolute;
+  left: 86%;
+  top: -23%;
+  animation-delay: -0.5s;
+}
+.allstars .star6 {
+  position: absolute;
+  left: 71%;
+  top: -27%;
+  animation-delay: -0.6s;
+}
+.allstars .star7 {
+  position: absolute;
+  left: 95%;
+  top: 6%;
+  animation-delay: -0.7s;
+}
+.allstars .star8 {
+  position: absolute;
+  left: 38%;
+  top: 13%;
+  animation-delay: -0.8s;
+}
+.allstars .star9 {
+  position: absolute;
+  left: 30%;
+  top: 23%;
+  animation-delay: -0.9s;
+}
+.allstars .star10 {
+  position: absolute;
+  left: 92%;
+  top: -25%;
+  animation-delay: -1s;
+}
+.allstars .star11 {
+  position: absolute;
+  left: 21%;
+  top: -18%;
+  animation-delay: -1.1s;
+}
+.allstars .star12 {
+  position: absolute;
+  left: 46%;
+  top: -23%;
+  animation-delay: -1.2s;
+}
+.allstars .star13 {
+  position: absolute;
+  left: 94%;
+  top: 46%;
+  animation-delay: -1.3s;
+}
+.allstars .star14 {
+  position: absolute;
+  left: 83%;
+  top: -13%;
+  animation-delay: -1.4s;
+}
+.allstars .star15 {
+  position: absolute;
+  left: 75%;
+  top: -12%;
+  animation-delay: -1.5s;
+}
+.allstars .star16 {
+  position: absolute;
+  left: 80%;
+  top: 49%;
+  animation-delay: -1.6s;
+}
+.allstars .star17 {
+  position: absolute;
+  left: 11%;
+  top: -20%;
+  animation-delay: -1.7s;
+}
+.allstars .star18 {
+  position: absolute;
+  left: 98%;
+  top: 36%;
+  animation-delay: -1.8s;
+}
+.allstars .star19 {
+  position: absolute;
+  left: 5%;
+  top: 29%;
+  animation-delay: -1.9s;
+}
+.allstars .star20 {
+  position: absolute;
+  left: 51%;
+  top: -28%;
+  animation-delay: -2s;
+}
+.allstars .star21 {
+  position: absolute;
+  left: 27%;
+  top: 39%;
+  animation-delay: -2.1s;
+}
+.allstars .star22 {
+  position: absolute;
+  left: 97%;
+  top: 42%;
+  animation-delay: -2.2s;
+}
+.allstars .star23 {
+  position: absolute;
+  left: 68%;
+  top: 2%;
+  animation-delay: -2.3s;
+}
+.allstars .star24 {
+  position: absolute;
+  left: 60%;
+  top: -20%;
+  animation-delay: -2.4s;
+}
+.allstars .star25 {
+  position: absolute;
+  left: 35%;
+  top: 20%;
+  animation-delay: -2.5s;
+}
+.allstars .star26 {
+  position: absolute;
+  left: 73%;
+  top: 33%;
+  animation-delay: -2.6s;
+}
+.allstars .star27 {
+  position: absolute;
+  left: 10%;
+  top: -30%;
+  animation-delay: -2.7s;
+}
+.allstars .star28 {
+  position: absolute;
+  left: 14%;
+  top: -16%;
+  -webkit-animation-delay: -2.8s;
+          animation-delay: -2.8s;
+}
+.allstars .star29 {
+  position: absolute;
+  left: 12%;
+  top: -7%;
+  animation-delay: -2.9s;
+}
+.allstars .star30 {
+  position: absolute;
+  left: 82%;
+  top: 2%;
+  animation-delay: -3s;
 }
