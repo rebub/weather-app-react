@@ -49,7 +49,7 @@ function App() {
 
   return ( 
 
-    <div className = {(time < 19) ? "app day" : "app night"}>
+    <div className = {(time > 19) ? "app day" : "app night"}>
 
 
       <main>
